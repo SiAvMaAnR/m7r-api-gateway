@@ -5,7 +5,7 @@ services:
     restart: on-failure
     environment:
       APP_PORT: 8080
-      ALLOWED_ORIGIN_URL: 'http://147.45.78.164:3000'
+      ALLOWED_ORIGIN_URL: 'messenger-client:3000'
       AUTH_SERVICE_API_URL: 'auth-service:8081'
       ACCOUNTS_SERVICE_API_URL: 'accounts-service:8082'
       CHAT_SERVICE_API_URL: 'chat-service:8083'

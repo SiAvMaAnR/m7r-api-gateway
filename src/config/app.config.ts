@@ -3,11 +3,16 @@ export default (): Config => ({
     port: parseInt(process.env.APP_PORT),
   },
   router: {
-    ['/api/auth']: 'http://127.0.0.1:8081',
-    ['/api/accounts']: 'http://127.0.0.1:8082',
-    ['/api/chat']: 'http://127.0.0.1:8083',
-    ['/api/notifications']: 'http://127.0.0.1:8084',
-    ['/api/ai']: 'http://127.0.0.1:8085',
+    api: {
+      ['/api/auth']: process.env.AUTH_SERVICE_API_URL,
+      ['/api/accounts']: process.env.ACCOUNTS_SERVICE_API_URL,
+      ['/api/chat']: process.env.CHAT_SERVICE_API_URL,
+      ['/api/notifications']: process.env.NOTIFICATIONS_SERVICE_API_URL,
+      ['/api/ai']: process.env.AI_SERVICE_API_URL,
+    },
+    ws: {
+      ['/signalR/chat']: process.env.CHAT_SERVICE_WS_URL,
+    },
   },
 });
 
@@ -15,7 +20,12 @@ export interface AppConfig {
   port: number;
 }
 
+export interface RouterConfig {
+  api: Record<string, string>;
+  ws: Record<string, string>;
+}
+
 export interface Config {
   app: AppConfig;
-  router: Record<string, string>;
+  router: RouterConfig;
 }

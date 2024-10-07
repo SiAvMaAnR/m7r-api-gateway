@@ -1,5 +1,9 @@
-dotnet build
+npm i jest
 
-dotnet format
+npm i eslint
 
-dotnet test
+npm run build
+
+npm run lint
+
+npm run test

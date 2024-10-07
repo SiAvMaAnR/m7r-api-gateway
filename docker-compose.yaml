@@ -5,6 +5,12 @@ services:
     restart: on-failure
     environment:
       APP_PORT: 8080
+      AUTH_SERVICE_API_URL: 'auth-service:8081'
+      ACCOUNTS_SERVICE_API_URL: 'accounts-service:8082'
+      CHAT_SERVICE_API_URL: 'chat-service:8083'
+      NOTIFICATIONS_SERVICE_API_URL: 'notifications-service:8084'
+      AI_SERVICE_API_URL: 'ai-service:8085'
+      CHAT_SERVICE_WS_URL: 'chat-service:8083'
     ports:
       - '8080:8080'
     networks:

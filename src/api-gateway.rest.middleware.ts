@@ -9,7 +9,7 @@ export class RestProxyMiddleware implements NestMiddleware {
   private proxy: RequestHandler;
 
   constructor(private readonly config: ConfigService) {
-    const router = this.config.get<Record<string, string>>('router');
+    const router = this.config.get<Record<string, string>>('router.api');
 
     this.proxy = createProxyMiddleware({
       changeOrigin: true,
@@ -32,18 +32,3 @@ export class RestProxyMiddleware implements NestMiddleware {
     this.proxy(req, res, next);
   }
 }
-
-// @Injectable()
-// export class WSProxyMiddleware implements NestMiddleware {
-//   constructor(private readonly config: ConfigService) {}
-
-//   use(req: Request, res: Response, next: NextFunction) {
-//     const proxy = createProxyMiddleware({
-//       // target: serviceHost,
-//       changeOrigin: true,
-//       router: this.config.get<Record<string, string>>('router'),
-//     });
-
-//     this.proxy(req, res, next);
-//   }
-// }

@@ -1,10 +1,8 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import config from './config/app.config';
-import {
-  RestProxyMiddleware,
-  // WSProxyMiddleware,
-} from './api-gateway.middlewares';
+import { RestProxyMiddleware } from './api-gateway.rest.middleware';
+import { WSProxyMiddleware } from './api-gateway.ws.middleware';
 import { TimerMiddleware } from './middlewares/timer.middleware';
 
 @Module({
@@ -18,8 +16,8 @@ export class ApiGatewayModule {
       .apply(TimerMiddleware)
       .forRoutes('*')
       .apply(RestProxyMiddleware)
-      .forRoutes({ path: '/api/*', method: RequestMethod.ALL });
-    // .apply(WSProxyMiddleware)
-    // .forRoutes({ path: '/signalR/*', method: RequestMethod.ALL });
+      .forRoutes({ path: '/api/*', method: RequestMethod.ALL })
+      .apply(WSProxyMiddleware)
+      .forRoutes({ path: '/signalR/*', method: RequestMethod.ALL });
   }
 }

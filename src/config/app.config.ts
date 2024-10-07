@@ -1,6 +1,7 @@
 export default (): Config => ({
   app: {
     port: parseInt(process.env.APP_PORT),
+    allowedOrigins: [process.env.ALLOWED_ORIGIN_URL],
   },
   router: {
     api: {
@@ -18,6 +19,7 @@ export default (): Config => ({
 
 export interface AppConfig {
   port: number;
+  allowedOrigins: Array<string>;
 }
 
 export interface RouterConfig {

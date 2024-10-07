@@ -1,19 +1,18 @@
 services:
-  notifications-service:
-    image: samarkinivan/notifications-service:latest
-    container_name: notifications-service
+  api-gateway:
+    image: samarkinivan/api-gateway:latest
+    container_name: api-gateway
     restart: on-failure
     environment:
-      APP_PORT: 8081
-      MAIL_HOST: 'smtp.gmail.com'
-      MAIL_USER: 'samarkin20022002@gmail.com'
-      MAIL_PASSWORD: 'dasirmpudrndcqsj'
-      MAIL_FROM: 'samarkin20022002@gmail.com'
-      MAIL_PORT: 587
-      RMQ_QUEUE: 'notifications-queue'
-      RMQ_URL: 'amqp://rabbitmq:5672'
+      APP_PORT: 8080
+      AUTH_SERVICE_API_URL: 'auth-service:8081'
+      ACCOUNTS_SERVICE_API_URL: 'accounts-service:8082'
+      CHAT_SERVICE_API_URL: 'chat-service:8083'
+      NOTIFICATIONS_SERVICE_API_URL: 'notifications-service:8084'
+      AI_SERVICE_API_URL: 'ai-service:8085'
+      CHAT_SERVICE_WS_URL: 'chat-service:8083'
     ports:
-      - '8081:8081'
+      - '8080:8080'
     networks:
       - app-network
 

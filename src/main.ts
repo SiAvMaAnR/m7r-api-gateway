@@ -1,13 +1,20 @@
 import { NestFactory } from '@nestjs/core';
 import { ApiGatewayModule } from './api-gateway.module';
 import { ConfigService } from '@nestjs/config';
+import { AppConfig } from './config/app.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(ApiGatewayModule);
 
   const configService = app.get(ConfigService);
-  const appPort = configService.get<number>('app.port');
+  const { port, allowedOrigins } = configService.get<AppConfig>('app');
+  console.log(allowedOrigins);
 
-  await app.listen(appPort);
+  app.enableCors({
+    origin: allowedOrigins,
+    credentials: true,
+  });
+
+  await app.listen(port);
 }
 bootstrap();

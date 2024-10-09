@@ -11,6 +11,8 @@ export class RestProxyMiddleware implements NestMiddleware {
   constructor(private readonly config: ConfigService) {
     const router = this.config.get<Record<string, string>>('router.api');
 
+    console.log('router', router);
+
     this.proxy = createProxyMiddleware({
       changeOrigin: true,
       router,

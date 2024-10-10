@@ -26,6 +26,9 @@ export class RestProxyMiddleware implements NestMiddleware {
             proxyReq.end();
           }
         },
+        error: (error) => {
+          console.error(error);
+        },
       },
     });
   }
